@@ -13,12 +13,18 @@ func main() {
 	uBound := 25
 	lBound := -uBound
 	x := make([]int, 0) //makean empty in
-	//y := make([]int, 2, 2)
-	x = append(x, lBound)
-	x = append(x, uBound)
+	y := make([]int, 0)
+	x = append(x, lBound, uBound)
+	y = append(y, 0, 0)
 	fmt.Println(x)
-	x = insert(x, 12, 1) //insert at index 1 of x
+	fmt.Println(y)
+	//x = insert(x, 25, 1)
 	fmt.Println(x)
+	for i := 0; i <= 2; i++ {
+		midpoint := int((x[i] + x[i+1]) / 2)
+		x = insert(x, midpoint, i+1)
+		fmt.Println(x)
+	}
 }
 func insert(a []int, element int, index int) []int {
 	return append(a[:index], append([]int{element}, a[index:]...)...)
