@@ -20,11 +20,13 @@ func main() {
 	fmt.Println(y)
 	//x = insert(x, 25, 1)
 	fmt.Println(x)
-	for i := 0; i <= 2; i++ {
+	aLen := len(x) - 1
+	for i := 0; i < aLen; i++ {
 		midpoint := int((x[i] + x[i+1]) / 2)
 		x = insert(x, midpoint, i+1)
 		fmt.Println(x)
 	}
+	aLen = len(x) - 1
 }
 func insert(a []int, element int, index int) []int {
 	return append(a[:index], append([]int{element}, a[index:]...)...)
