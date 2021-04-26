@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math/rand"
 	"strconv"
@@ -9,10 +10,21 @@ import (
 	"github.com/pmylund/sortutil"
 )
 
+var (
+	seed int
+	iter int
+)
+
 func main() {
-	seed := int(time.Now().Unix())
-	fmt.Println(seed)
-	rand.Seed(int64(seed))
+	seed = int(time.Now().Unix()) //get default rand seed
+
+	flag.IntVar(&seed, "s", seed, "seed")    //parse seed flag
+	flag.IntVar(&iter, "i", 5, "iterations") //parse iterations
+	flag.Parse()                             //parse
+
+	fmt.Println(seed)      //print seed
+	rand.Seed(int64(seed)) //seed rng
+
 	bound := 25.0
 	points := make([]point, 0) //makean empty slice
 	fmt.Println(points)
@@ -29,7 +41,7 @@ func main() {
 	sortutil.AscByField(points, "x")
 	//fmt.Println(points)
 
-	points = createPoints(points, 4)
+	points = createPoints(points, iter)
 	fmt.Println("Created slice of points", strconv.Itoa(len(points)), "elements long")
 	fmt.Println(points)
 }
